@@ -16,7 +16,8 @@ class LaravelRerouterServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-rerouter');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-rerouter');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->app->make('Illuminate\Database\Eloquent\Factory')->load(__DIR__ . '/../database/factories');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
@@ -51,6 +52,8 @@ class LaravelRerouterServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-rerouter');
+
+        $this->registerEloquentFactoriesFrom(__DIR__.'/../database/factories');
 
         // Register the main class to use with the facade
         $this->app->singleton('laravel-rerouter', function () {
